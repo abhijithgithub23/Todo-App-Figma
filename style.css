@@ -1,0 +1,130 @@
+:root {
+  --bg: #f4f4f4;
+  --card: #ffffff;
+  --text: #111;
+  --primary: #4f46e5;
+}
+
+body.dark {
+  --bg: #121212;
+  --card: #1e1e1e;
+  --text: #f5f5f5;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+}
+
+.container {
+  width: 500px;
+  margin: 0 auto;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.header h1 {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.controls {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.controls input {
+  flex: 1;
+  padding: 8px;
+}
+
+.controls select,
+.controls button {
+  padding: 8px;
+  cursor: pointer;
+}
+
+.bottom {
+  flex: 1;
+  position: relative;
+}
+
+.todo-list {
+  max-width: 450px;
+  margin: 0 auto;
+}
+
+.todo-item {
+  background: var(--card);
+  padding: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 6px;
+}
+
+.todo-item.completed span {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+
+.todo-actions button {
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+.add-btn {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  background: var(--primary);
+  color: white;
+  border: none;
+  font-size: 20px;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: var(--card);
+  padding: 20px;
+  width: 300px;
+  border-radius: 8px;
+}
+
+.modal-content h2 {
+  margin-bottom: 10px;
+}
+
+.modal-content input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: space-between;
+}
