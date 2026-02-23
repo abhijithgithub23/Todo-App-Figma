@@ -1,226 +1,360 @@
 :root {
-  --primary: #4f46e5;
-  --bg: #ffffff;
-  --text: #000000;
-  --card: #ffffff;
-  --border: #eeeeee;
+  --primary: #6c63ff; /* The specific purplish-blue from your image */
+  --bg-color: #f7f7f7;
+  --text-dark: #252525;
+  --text-light: #c4c4c4;
+  --line-color: #e6e6fa;
+  --modal-overlay: rgba(37, 37, 37, 0.7);
+  --card-bg: #ffffff;
 }
 
+/* Dark Mode Variable Overrides */
 body.dark {
-  --bg: #000000;
-  --text: #ffffff;
-  --card: #111111;
-  --border: #333333;
+  --bg-color: #252525;
+  --text-dark: #f7f7f7;
+  --card-bg: #252525;
+  --line-color: #333333;
 }
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family:
+    "Nunito", sans-serif; /* Matching the clean typography in the screenshot */
 }
 
 body {
-  background: var(--bg);
-  color: var(--text);
-  transition: background 0.3s ease;
-}
-
-.container {
-  max-width: 600px;
-  margin: 0 auto;
+  background-color: var(--bg-color);
+  color: var(--text-dark);
   min-height: 100vh;
-  padding: 40px 20px;
+  display: flex;
+  justify-content: center;
+  padding-top: 40px;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease; /* Smooth theme transition */
 }
 
-.header h1 {
-  letter-spacing: 2px;
-  margin-bottom: 30px;
-  font-weight: 800;
+.app-container {
+  width: 100%;
+  max-width: 750px;
+  padding: 0 20px;
+  position: relative;
+}
+
+.title {
   text-align: center;
+  font-size: 26px;
+  font-weight: 800;
+  margin-bottom: 30px;
+  color: var(--text-dark);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
 }
 
+/* --- Controls Section --- */
 .controls {
   display: flex;
-  flex-direction: column;
   gap: 15px;
   margin-bottom: 30px;
+  align-items: center;
 }
 
-#search {
+.search-wrapper {
+  flex-grow: 1;
+  position: relative;
+}
+
+.search-wrapper input {
   width: 100%;
-  padding: 14px 25px;
-  border-radius: 30px;
-  border: 2px solid var(--primary);
-  background: var(--bg);
-  color: var(--text);
-  font-size: 1rem;
+  padding: 12px 45px 12px 15px;
+  border: 1px solid var(--primary);
+  border-radius: 5px;
+  font-size: 16px;
+  background: transparent;
+  color: var(--text-dark);
   outline: none;
 }
 
-.actions-right {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  gap: 12px;
+.search-wrapper input::placeholder {
+  color: var(--text-light);
 }
 
-#filter {
-  padding: 8px 15px;
-  border-radius: 20px;
-  border: 2px solid var(--primary);
-  background: var(--bg);
-  color: var(--text);
+.search-icon {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+}
+
+.filter-wrapper {
+  position: relative;
+}
+
+#filterSelect {
+  appearance: none;
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  padding: 12px 35px 12px 15px;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: 700;
   cursor: pointer;
   outline: none;
-  font-weight: 600;
+  text-transform: uppercase;
 }
 
-.icon-btn {
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
+.dropdown-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  pointer-events: none;
+}
+
+.theme-btn {
+  background-color: var(--primary);
   border: none;
+  width: 45px;
+  height: 45px;
+  border-radius: 5px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  font-size: 20px;
-  transition: transform 0.2s;
+  transition: transform 0.2s ease;
 }
 
-.add-btn {
-  background: var(--primary);
-  color: white;
-  font-weight: bold;
-}
-.theme-btn {
-  /* background: var(--text); */
-  color: var(--bg);
-}
-.icon-btn:hover {
-  transform: scale(1.1);
+.theme-btn:active {
+  transform: scale(0.95);
 }
 
-/* Status Messages */
-.status-container {
-  text-align: center;
-  margin-top: 50px;
+.theme-btn svg {
+  width: 22px;
+  height: 22px;
 }
 
-.status-container img {
-  width: 150px;
-  height: auto;
+/* --- Empty State --- */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 60px;
+}
+
+.empty-state img {
+  width: 250px;
   margin-bottom: 15px;
-  filter: grayscale(1) opacity(0.5); /* Makes images fit the minimalist theme */
 }
 
-body.dark .status-container img {
-  filter: grayscale(1) invert(1) opacity(0.5);
+body.dark .empty-state img {
+  filter: brightness(0.8) contrast(1.2);
 }
 
-.status-container p {
+.empty-state p {
+  color: var(--text-dark);
+  font-size: 18px;
   font-weight: 600;
-  opacity: 0.6;
 }
 
-/* Todo List Items */
+/* --- Todo List Items --- */
+.todo-list {
+  display: flex;
+  flex-direction: column;
+}
+
 .todo-item {
-  background: var(--card);
-  border: 1px solid var(--border);
-  padding: 15px;
-  margin-bottom: 12px;
   display: flex;
   align-items: center;
-  border-radius: 12px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--line-color);
 }
 
-.todo-item input[type="checkbox"] {
-  width: 20px;
-  height: 20px;
-  accent-color: var(--primary);
+.todo-item:first-child {
+  border-top: 1px solid var(--line-color);
+}
+
+/* Custom Checkbox exactly as shown */
+.custom-checkbox {
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  border: 2px solid var(--primary);
+  border-radius: 3px;
   cursor: pointer;
-  margin-right: 15px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.custom-checkbox:checked {
+  background-color: var(--primary);
+}
+
+.custom-checkbox:checked::after {
+  content: "";
+  width: 5px;
+  height: 11px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+  position: absolute;
+  top: 2px;
 }
 
 .todo-text {
-  flex: 1;
-  font-size: 1rem;
-}
-.completed .todo-text {
-  text-decoration: line-through;
-  opacity: 0.5;
+  flex-grow: 1;
+  margin-left: 15px;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-dark);
 }
 
-.action-icon {
+.todo-item.completed .todo-text {
+  text-decoration: line-through;
+  color: var(--text-light);
+  font-weight: 400;
+}
+
+.actions {
+  display: flex;
+  gap: 15px;
+}
+
+.action-btn {
   background: none;
   border: none;
   cursor: pointer;
-  padding: 5px;
+  display: flex;
+  align-items: center;
 }
 
-.edit-icon svg {
-  stroke: var(--primary);
-}
-.delete-icon svg {
-  stroke: #ff4444;
+.action-btn svg {
+  width: 20px;
+  height: 20px;
+  stroke: var(--text-light);
+  transition: stroke 0.2s;
 }
 
-/* Modal */
-.modal {
+.action-btn:hover svg {
+  stroke: var(--text-dark);
+}
+
+/* --- Floating Action Button --- */
+.fab {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  background-color: var(--primary);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(108, 99, 255, 0.4);
+  z-index: 10;
+  transition: transform 0.2s ease;
+}
+
+.fab:hover {
+  transform: scale(1.05);
+}
+
+.fab svg {
+  width: 35px;
+  height: 35px;
+}
+
+/* --- Modal Overlay & Content --- */
+.modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.7);
+  background-color: var(--modal-overlay);
   display: none;
   justify-content: center;
   align-items: center;
-  z-index: 1000;
+  z-index: 100;
 }
 
-.modal-content {
-  background: var(--card);
+.modal-overlay.active {
+  display: flex;
+}
+
+.modal {
+  background: var(--card-bg);
+  border-radius: 12px;
   padding: 30px;
   width: 90%;
-  max-width: 400px;
-  border-radius: 20px;
-  border: 1px solid var(--primary);
+  max-width: 500px;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
 }
 
-.modal-content input {
+.modal h2 {
+  font-size: 22px;
+  margin-bottom: 25px;
+  font-weight: 800;
+  color: var(--text-dark);
+  letter-spacing: 1px;
+}
+
+.modal input {
   width: 100%;
-  padding: 12px;
-  margin: 20px 0;
-  border-radius: 10px;
-  border: 1px solid var(--border);
-  background: var(--bg);
-  color: var(--text);
+  padding: 14px 15px;
+  border: 1px solid var(--primary);
+  border-radius: 5px;
+  font-size: 16px;
+  margin-bottom: 30px;
   outline: none;
+  background: transparent;
+  color: var(--text-dark);
 }
 
-.modal-content input:focus {
-  border-color: var(--primary);
-}
-
-.modal-buttons {
+.modal-actions {
   display: flex;
-  gap: 10px;
+  justify-content: space-between;
+  gap: 20px;
 }
-.primary-btn {
+
+.btn-cancel,
+.btn-apply {
   flex: 1;
+  padding: 12px;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  border: 1px solid var(--primary);
+  text-transform: uppercase;
+  transition: 0.2s;
+}
+
+.btn-cancel {
+  background: transparent;
+  color: var(--primary);
+}
+
+.btn-cancel:hover {
+  background: rgba(108, 99, 255, 0.05);
+}
+
+.btn-apply {
   background: var(--primary);
   color: white;
-  border: none;
-  padding: 12px;
-  border-radius: 10px;
-  cursor: pointer;
-  font-weight: 600;
 }
-.secondary-btn {
-  flex: 1;
-  background: none;
-  border: 1px solid var(--primary);
-  color: var(--primary);
-  padding: 12px;
-  border-radius: 10px;
-  cursor: pointer;
+
+.btn-apply:hover {
+  background: #5b54d6;
 }

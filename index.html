@@ -3,52 +3,58 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Modern Todo App</title>
+  <title>Todo App</title>
   <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<div class="container">
-  <div class="header">
-    <h1>TODO APP</h1>
+  <div class="app-container">
+    <h1 class="title">TODO LIST</h1>
 
     <div class="controls">
-      <input type="text" id="search" placeholder="Search tasks...">
+      <div class="search-wrapper">
+        <input type="text" id="searchInput" placeholder="Search note...">
+        <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#6C63FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      </div>
       
-      <div class="actions-right">
-        <select id="filter">
-          <option value="all">All</option>
-          <option value="pending">Pending</option>
-          <option value="completed">Completed</option>
+      <div class="filter-wrapper">
+        <select id="filterSelect">
+          <option value="ALL">ALL</option>
+          <option value="INCOMPLETE">INCOMPLETE</option>
+          <option value="COMPLETE">COMPLETE</option>
         </select>
+        <svg class="dropdown-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+      </div>
 
-        <button id="openModal" class="icon-btn add-btn" title="Add Task">+</button>
-        
-        <button id="themeToggle" class="icon-btn theme-btn">
-          <span id="themeIcon">🌙</span>
-        </button>
+      <button id="themeToggle" class="theme-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+      </button>
+    </div>
+
+    <div id="emptyState" class="empty-state">
+      <img src="https://raw.githubusercontent.com/KaterinaLupacheva/react-todo-app/main/src/assets/empty-dark.png" alt="Empty Illustration">
+      <p>Empty...</p>
+    </div>
+
+    <div class="todo-list" id="todoList"></div>
+  </div>
+
+  <button class="fab" id="fab">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+  </button>
+
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal">
+      <h2>NEW NOTE</h2>
+      <input type="text" id="noteInput" placeholder="Input your note...">
+      <div class="modal-actions">
+        <button id="cancelBtn" class="btn-cancel">CANCEL</button>
+        <button id="applyBtn" class="btn-apply">APPLY</button>
       </div>
     </div>
   </div>
 
-  <div class="bottom">
-    <div id="statusMessage" class="status-container"></div>
-    <div class="todo-list" id="todoList"></div>
-  </div>
-</div>
-
-<div class="modal" id="modal">
-  <div class="modal-content">
-    <h2>New Task</h2>
-    <input type="text" id="newTaskInput" placeholder="What needs to be done?">
-
-    <div class="modal-buttons">
-      <button id="cancelBtn" class="secondary-btn">Cancel</button>
-      <button id="addTaskBtn" class="primary-btn">Add Task</button>
-    </div>
-  </div>
-</div>
-
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
