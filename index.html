@@ -2,45 +2,49 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Todo App</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modern Todo App</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <div class="container">
-
   <div class="header">
     <h1>TODO APP</h1>
 
     <div class="controls">
-      <input type="text" id="search" placeholder="Search...">
+      <input type="text" id="search" placeholder="Search tasks...">
       
-      <select id="filter">
-        <option value="all">All</option>
-        <option value="pending">Pending</option>
-        <option value="completed">Completed</option>
-      </select>
+      <div class="actions-right">
+        <select id="filter">
+          <option value="all">All</option>
+          <option value="pending">Pending</option>
+          <option value="completed">Completed</option>
+        </select>
 
-      <button id="themeToggle">Theme</button>
+        <button id="openModal" class="icon-btn add-btn" title="Add Task">+</button>
+        
+        <button id="themeToggle" class="icon-btn theme-btn">
+          <span id="themeIcon">🌙</span>
+        </button>
+      </div>
     </div>
   </div>
 
   <div class="bottom">
+    <div id="statusMessage" class="status-container"></div>
     <div class="todo-list" id="todoList"></div>
-    <button class="add-btn" id="openModal">+</button>
   </div>
-
 </div>
 
-<!-- Modal -->
 <div class="modal" id="modal">
   <div class="modal-content">
     <h2>New Task</h2>
-    <input type="text" id="newTaskInput" placeholder="Enter task">
+    <input type="text" id="newTaskInput" placeholder="What needs to be done?">
 
     <div class="modal-buttons">
-      <button id="cancelBtn">Cancel</button>
-      <button id="addTaskBtn">Add</button>
+      <button id="cancelBtn" class="secondary-btn">Cancel</button>
+      <button id="addTaskBtn" class="primary-btn">Add Task</button>
     </div>
   </div>
 </div>
