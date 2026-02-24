@@ -62,6 +62,8 @@ function renderTodos() {
   }
 }
 
+
+
 // Modal Logic
 function openModal() {
   modalOverlay.classList.add("active");
@@ -74,6 +76,7 @@ function closeModal() {
   editId = null;
 }
 
+// function to add or update a todo
 function handleApply() {
   const text = noteInput.value.trim();
   if (!text) return;

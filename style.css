@@ -1,5 +1,5 @@
 :root {
-  --primary: #6c63ff; /* The specific purplish-blue from your image */
+  --primary: #6C63FF; 
   --bg-color: #f7f7f7;
   --text-dark: #252525;
   --text-light: #c4c4c4;
@@ -181,7 +181,6 @@ body.dark .empty-state img {
   border-top: 1px solid var(--line-color);
 }
 
-/* Custom Checkbox exactly as shown */
 .custom-checkbox {
   appearance: none;
   width: 24px;
