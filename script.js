@@ -23,7 +23,7 @@ function saveToLocal() {
   localStorage.setItem("todos", JSON.stringify(todos));
 }
 
-// Render 
+// Render fnction
 function renderTodos() {
   const searchTerm = searchInput.value.toLowerCase();
   const filterVal = filterSelect.value;
@@ -92,12 +92,12 @@ function handleApply() {
   const text = noteInput.value.trim();
   if (!text) return;
 
-  if (editId !== null) {
+  if (editId !== null) { // For editing todo
     const oldTodo = todos.find(t => t.id === editId);
     historyStack.push({ action: "edit", todo: { ...oldTodo } });
 
     todos = todos.map(t => (t.id === editId ? { ...t, text } : t));
-  } else {
+  } else {  // For adding new todo
     const newTodo = { id: Date.now(), text, completed: false };
     todos.push(newTodo);
     historyStack.push({ action: "add", todo: { ...newTodo } });
