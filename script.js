@@ -196,4 +196,4 @@ searchInput.addEventListener("input", renderTodos);
 filterSelect.addEventListener("change", renderTodos);
 
 
-renderTodos();
+renderTodos(); 

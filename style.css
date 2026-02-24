@@ -21,7 +21,7 @@ body.dark {
   padding: 0;
   box-sizing: border-box;
   font-family:
-    "Nunito", sans-serif; /* Matching the clean typography in the screenshot */
+    "Nunito", sans-serif; 
 }
 
 body {
@@ -33,7 +33,7 @@ body {
   padding-top: 40px;
   transition:
     background-color 0.3s ease,
-    color 0.3s ease; /* Smooth theme transition */
+    color 0.3s ease; 
 }
 
 .app-container {
