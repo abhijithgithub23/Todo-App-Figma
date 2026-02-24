@@ -1,8 +1,6 @@
-// Load todos from local storage or start with an empty array
 let todos = JSON.parse(localStorage.getItem("todos")) || [];
 let editId = null;
 
-// History stack for undo functionality
 let historyStack = [];
 
 const todoList = document.getElementById("todoList");
@@ -11,24 +9,21 @@ const searchInput = document.getElementById("searchInput");
 const filterSelect = document.getElementById("filterSelect");
 const themeToggle = document.getElementById("themeToggle");
 
-// Modal Elements
 const modalOverlay = document.getElementById("modalOverlay");
 const fab = document.getElementById("fab");
 const cancelBtn = document.getElementById("cancelBtn");
 const applyBtn = document.getElementById("applyBtn");
 const noteInput = document.getElementById("noteInput");
-const undoBtn = document.getElementById("undoBtn"); // Undo button
+const undoBtn = document.getElementById("undoBtn"); 
 
-// Icon SVGs
 const pencilIcon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>`;
 const trashIcon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>`;
 
-// Save to Local Storage
 function saveToLocal() {
   localStorage.setItem("todos", JSON.stringify(todos));
 }
 
-// Render todos
+// Render 
 function renderTodos() {
   const searchTerm = searchInput.value.toLowerCase();
   const filterVal = filterSelect.value;
@@ -68,9 +63,16 @@ function renderTodos() {
     });
   }
   console.clear();
-  console.log(JSON.stringify(historyStack, null, 2));
-  
+  // console.log(JSON.stringify(historyStack, null, 2));
 
+  console.table(
+  historyStack.map((item, index) => ({
+    index: index,
+    action: item.action,
+    id: item.todo.id,
+    text: item.todo.text
+  }))
+);
 }
 
 // Modal Logic
@@ -106,7 +108,7 @@ function handleApply() {
   renderTodos();
 }
 
-// Toggle done
+// chekc box done
 window.toggleDone = function (id) {
   const oldTodo = todos.find(t => t.id === id);
   historyStack.push({ action: "toggle", todo: { ...oldTodo } });
@@ -127,7 +129,7 @@ window.deleteTodo = function (id) {
   }
 };
 
-// Open edit modal
+// Open edit box
 window.openEdit = function (id) {
   const todo = todos.find(t => t.id === id);
   if (todo) {
@@ -162,7 +164,7 @@ function undo() {
   renderTodos();
 }
 
-// Theme Toggle Logic
+// Theme 
 themeToggle.addEventListener("click", () => {
   document.body.classList.toggle("dark");
   const isDark = document.body.classList.contains("dark");
@@ -174,7 +176,7 @@ if (localStorage.getItem("theme") === "dark") {
   document.body.classList.add("dark");
 }
 
-// Event Listeners
+
 fab.addEventListener("click", () => {
   editId = null;
   noteInput.value = "";

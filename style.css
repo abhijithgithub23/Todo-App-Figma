@@ -280,7 +280,7 @@ body.dark .empty-state img {
   position: fixed;
   width: 65px;
   height: 65px;
-  bottom: 140px; 
+  bottom: 125px; 
   right: 40px;
   background-color: var(--primary);
   border-radius: 50%;
@@ -294,6 +294,15 @@ body.dark .empty-state img {
   box-shadow: 0 4px 15px rgba(108, 99, 255, 0.4);
   z-index: 10;
   transition: transform 0.2s ease;
+}
+
+.undo-btn:hover {
+  transform: scale(1.05);
+}
+
+.undo-btn svg {
+  width: 30px;
+  height: 30px;
 }
 
 /* --- Modal Overlay & Content --- */
