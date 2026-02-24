@@ -276,6 +276,26 @@ body.dark .empty-state img {
   height: 35px;
 }
 
+.undo-btn {
+  position: fixed;
+  width: 65px;
+  height: 65px;
+  bottom: 140px; 
+  right: 40px;
+  background-color: var(--primary);
+  border-radius: 50%;
+  color: white;
+  cursor: pointer;
+  border: none;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(108, 99, 255, 0.4);
+  z-index: 10;
+  transition: transform 0.2s ease;
+}
+
 /* --- Modal Overlay & Content --- */
 .modal-overlay {
   position: fixed;

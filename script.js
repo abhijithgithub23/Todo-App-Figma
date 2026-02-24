@@ -2,6 +2,9 @@
 let todos = JSON.parse(localStorage.getItem("todos")) || [];
 let editId = null;
 
+// History stack for undo functionality
+let historyStack = [];
+
 const todoList = document.getElementById("todoList");
 const emptyState = document.getElementById("emptyState");
 const searchInput = document.getElementById("searchInput");
@@ -14,6 +17,7 @@ const fab = document.getElementById("fab");
 const cancelBtn = document.getElementById("cancelBtn");
 const applyBtn = document.getElementById("applyBtn");
 const noteInput = document.getElementById("noteInput");
+const undoBtn = document.getElementById("undoBtn"); // Undo button
 
 // Icon SVGs
 const pencilIcon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>`;
@@ -24,19 +28,20 @@ function saveToLocal() {
   localStorage.setItem("todos", JSON.stringify(todos));
 }
 
+// Render todos
 function renderTodos() {
   const searchTerm = searchInput.value.toLowerCase();
   const filterVal = filterSelect.value;
-  
+
   todoList.innerHTML = "";
 
   const filtered = todos.filter(todo => {
     const matchesSearch = todo.text.toLowerCase().includes(searchTerm);
-    const matchesFilter = 
-      filterVal === "ALL" || 
-      (filterVal === "INCOMPLETE" && !todo.completed) || 
+    const matchesFilter =
+      filterVal === "ALL" ||
+      (filterVal === "INCOMPLETE" && !todo.completed) ||
       (filterVal === "COMPLETE" && todo.completed);
-    
+
     return matchesSearch && matchesFilter;
   });
 
@@ -44,13 +49,15 @@ function renderTodos() {
     emptyState.style.display = "flex";
   } else {
     emptyState.style.display = "none";
-    
+
     filtered.forEach(todo => {
       const div = document.createElement("div");
-      div.className = `todo-item ${todo.completed ? 'completed' : ''}`;
+      div.className = `todo-item ${todo.completed ? "completed" : ""}`;
 
       div.innerHTML = `
-        <input type="checkbox" class="custom-checkbox" ${todo.completed ? 'checked' : ''} onchange="toggleDone(${todo.id})">
+        <input type="checkbox" class="custom-checkbox" ${
+          todo.completed ? "checked" : ""
+        } onchange="toggleDone(${todo.id})">
         <span class="todo-text">${todo.text}</span>
         <div class="actions">
           <button class="action-btn" onclick="openEdit(${todo.id})">${pencilIcon}</button>
@@ -60,9 +67,11 @@ function renderTodos() {
       todoList.appendChild(div);
     });
   }
+  console.clear();
+  console.log(JSON.stringify(historyStack, null, 2));
+  
+
 }
-
-
 
 // Modal Logic
 function openModal() {
@@ -76,45 +85,81 @@ function closeModal() {
   editId = null;
 }
 
-// function to add or update a todo
+// Add or update todo
 function handleApply() {
   const text = noteInput.value.trim();
   if (!text) return;
 
   if (editId !== null) {
-    todos = todos.map(t => t.id === editId ? { ...t, text } : t);
+    const oldTodo = todos.find(t => t.id === editId);
+    historyStack.push({ action: "edit", todo: { ...oldTodo } });
+
+    todos = todos.map(t => (t.id === editId ? { ...t, text } : t));
   } else {
-    todos.push({
-      id: Date.now(),
-      text,
-      completed: false
-    });
+    const newTodo = { id: Date.now(), text, completed: false };
+    todos.push(newTodo);
+    historyStack.push({ action: "add", todo: { ...newTodo } });
   }
 
-  saveToLocal(); // Save changes
+  saveToLocal();
   closeModal();
   renderTodos();
 }
 
-window.toggleDone = function(id) {
-  todos = todos.map(t => t.id === id ? { ...t, completed: !t.completed } : t);
-  saveToLocal(); // Save changes
-  renderTodos();
-}
+// Toggle done
+window.toggleDone = function (id) {
+  const oldTodo = todos.find(t => t.id === id);
+  historyStack.push({ action: "toggle", todo: { ...oldTodo } });
 
-window.deleteTodo = function(id) {
-  todos = todos.filter(t => t.id !== id);
-  saveToLocal(); // Save changes
+  todos = todos.map(t => (t.id === id ? { ...t, completed: !t.completed } : t));
+  saveToLocal();
   renderTodos();
-}
+};
 
-window.openEdit = function(id) {
+// Delete todo
+window.deleteTodo = function (id) {
+  const index = todos.findIndex(t => t.id === id);
+  if (index !== -1) {
+    historyStack.push({ action: "delete", todo: { ...todos[index] } });
+    todos.splice(index, 1);
+    saveToLocal();
+    renderTodos();
+  }
+};
+
+// Open edit modal
+window.openEdit = function (id) {
   const todo = todos.find(t => t.id === id);
   if (todo) {
     editId = todo.id;
     noteInput.value = todo.text;
     openModal();
   }
+};
+
+// Undo last action
+function undo() {
+  if (historyStack.length === 0) return;
+
+  const lastAction = historyStack.pop();
+
+  switch (lastAction.action) {
+    case "edit":
+    case "toggle":
+      todos = todos.map(t =>
+        t.id === lastAction.todo.id ? { ...lastAction.todo } : t
+      );
+      break;
+    case "delete":
+      todos.push(lastAction.todo);
+      break;
+    case "add":
+      todos = todos.filter(t => t.id !== lastAction.todo.id);
+      break;
+  }
+
+  saveToLocal();
+  renderTodos();
 }
 
 // Theme Toggle Logic
@@ -139,11 +184,14 @@ fab.addEventListener("click", () => {
 cancelBtn.addEventListener("click", closeModal);
 applyBtn.addEventListener("click", handleApply);
 
-noteInput.addEventListener("keydown", (e) => {
+undoBtn.addEventListener("click", undo); // undo button
+
+noteInput.addEventListener("keydown", e => {
   if (e.key === "Enter") handleApply();
 });
 
 searchInput.addEventListener("input", renderTodos);
 filterSelect.addEventListener("change", renderTodos);
+
 
 renderTodos();
