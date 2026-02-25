@@ -40,7 +40,7 @@ function renderTodos() {
     return matchesSearch && matchesFilter;
   });
 
-  if (todos.length === 0 || (searchTerm && filtered.length === 0)) {
+  if (filtered.length === 0) {
     emptyState.style.display = "flex";
   } else {
     emptyState.style.display = "none";

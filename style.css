@@ -1,3 +1,8 @@
+html {
+  
+  scrollbar-gutter: stable;
+}
+
 :root {
   --primary: #6C63FF; 
   --bg-color: #f7f7f7;
@@ -41,6 +46,8 @@ body {
   max-width: 750px;
   padding: 0 20px;
   position: relative;
+
+  margin: 0 auto; 
 }
 
 .title {
@@ -80,6 +87,11 @@ body {
 
 .search-wrapper input::placeholder {
   color: var(--text-light);
+}
+
+.search-wrapper input:focus {
+  box-shadow: 0 0 0 1px var(--primary); 
+  outline: none;
 }
 
 .search-icon {
@@ -221,9 +233,16 @@ body.dark .empty-state img {
 .todo-text {
   flex-grow: 1;
   margin-left: 15px;
+  margin-right: 15px;
   font-size: 18px;
   font-weight: 700;
   color: var(--text-dark);
+
+  min-width: 0;           
+  overflow-wrap: break-word; 
+  word-break: break-word
+
+
 }
 
 .todo-item.completed .todo-text {
@@ -235,6 +254,8 @@ body.dark .empty-state img {
 .actions {
   display: flex;
   gap: 15px;
+
+  flex-shrink: 0;
 }
 
 .action-btn {
