@@ -270,7 +270,7 @@ body.dark .empty-state img {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 15px rgba(108, 99, 255, 0.4);
+  /* box-shadow: 0 4px 15px rgba(108, 99, 255, 0.4); */
   z-index: 10;
   transition: transform 0.2s ease;
   flex-shrink: 0;
@@ -300,7 +300,7 @@ body.dark .empty-state img {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 15px rgba(108, 99, 255, 0.4);
+  /* box-shadow: 0 4px 15px rgba(108, 99, 255, 0.4); */
   z-index: 10;
   transition: transform 0.2s ease;
   flex-shrink: 0;
