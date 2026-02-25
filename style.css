@@ -130,7 +130,7 @@ body {
   background-color: var(--primary);
   border: none;
   width: 45px;
-  height: 45px;
+  height: 41px;
   border-radius: 5px;
   display: flex;
   align-items: center;
@@ -400,6 +400,7 @@ body.dark .empty-state img {
 
 /* additional styles for tooltip ---------------------*/
 
+/* Common tooltip style */
 .tooltip {
   position: absolute;
   bottom: 125%;
