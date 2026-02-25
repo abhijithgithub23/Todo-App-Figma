@@ -312,7 +312,7 @@ body.dark .empty-state img {
 
 .undo-btn svg {
   width: 20px;
-  height: 20px;
+  height: 25px;
 }
 
 /* --- Modal Overlay & Content -------------------------------------------------------- */
@@ -395,4 +395,31 @@ body.dark .empty-state img {
 
 .btn-apply:hover {
   background: #5b54d6;
+}
+
+
+/* additional styles for tooltip ---------------------*/
+
+.tooltip {
+  position: absolute;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+
+  background-color: #252525;
+  color: #fff;
+  font-size: 12px;
+  padding: 6px 8px;
+  border-radius: 4px;
+
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease 0.4s; /* includes delay */
+}
+
+/* Show tooltip on hover */
+.undo-btn:hover .tooltip,
+.fab:hover .tooltip {
+  opacity: 1;
 }
