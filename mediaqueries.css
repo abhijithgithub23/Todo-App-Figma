@@ -1,25 +1,23 @@
-/* --- Media Queries --- */
 @media (max-width: 720px) {
   .controls {
     flex-wrap: wrap;
-    justify-content: center; /* Centers the buttons on the second row */
+    justify-content: center; 
     gap: 10px;
   }
 
   .search-wrapper {
-    flex: 1 1 60%; /* Takes most of the top row */
+    flex: 1 1 60%; 
   }
 
   .filter-wrapper {
-    flex: 1 1 30%; /* Takes the rest of the top row */
+    flex: 1 1 30%; 
   }
 
-  /* Target the three small buttons */
   .theme-btn,
   .undo-btn,
   .fab {
-    flex: 0 0 auto; /* Prevent stretching */
-    width: 45px;    /* Maintain original square/circle size */
+    flex: 0 0 auto; 
+    width: 45px;    
     height: 45px;
     margin-top: 5px;
   }

@@ -53,7 +53,7 @@ body {
   text-transform: uppercase;
 }
 
-/* --- Controls Section --- */
+/* --- Controls Section --------------------------------------------------- */
 .controls {
   display: flex;
   gap: 15px;
@@ -112,7 +112,7 @@ body {
 
 #filterSelect option {
   background-color: white;
-  color: #6C63FF; /* your purple */
+  color: #6C63FF;
   border-color: #6C63FF;
 }
 
@@ -148,7 +148,7 @@ body {
   height: 22px;
 }
 
-/* --- Empty State --- */
+/* --- Empty State ------------------------------------------------------------------ */
 .empty-state {
   display: flex;
   flex-direction: column;
@@ -172,7 +172,7 @@ body.dark .empty-state img {
   font-weight: 600;
 }
 
-/* --- Todo List Items --- */
+/* --- Todo List Items -------------------------------------------------------------- */
 .todo-list {
   display: flex;
   flex-direction: column;
@@ -256,7 +256,7 @@ body.dark .empty-state img {
   stroke: var(--text-dark);
 }
 
-/* --- Floating Action Button --- */
+/* --- Floating Action Button ------------------------------------------------------- */
 .fab {
   /* position: fixed;
   bottom: 40px; */
@@ -315,7 +315,7 @@ body.dark .empty-state img {
   height: 20px;
 }
 
-/* --- Modal Overlay & Content --- */
+/* --- Modal Overlay & Content -------------------------------------------------------- */
 .modal-overlay {
   position: fixed;
   inset: 0;

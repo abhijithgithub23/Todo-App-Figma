@@ -171,7 +171,7 @@ themeToggle.addEventListener("click", () => {
   localStorage.setItem("theme", isDark ? "dark" : "light");
 });
 
-// Load saved theme on startup
+// Loads th theme from localstorage
 if (localStorage.getItem("theme") === "dark") {
   document.body.classList.add("dark");
 }
