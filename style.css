@@ -59,6 +59,7 @@ body {
   gap: 15px;
   margin-bottom: 30px;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .search-wrapper {
@@ -106,6 +107,7 @@ body {
   cursor: pointer;
   outline: none;
   text-transform: uppercase;
+  width: 100%;
 }
 
 #filterSelect option {
@@ -256,11 +258,11 @@ body.dark .empty-state img {
 
 /* --- Floating Action Button --- */
 .fab {
-  position: fixed;
-  bottom: 40px;
-  right: 40px;
-  width: 65px;
-  height: 65px;
+  /* position: fixed;
+  bottom: 40px; */
+  /* right: 40px; */
+  width: 45px;
+  height: 45px;
   border-radius: 50%;
   background-color: var(--primary);
   border: none;
@@ -271,6 +273,7 @@ body.dark .empty-state img {
   box-shadow: 0 4px 15px rgba(108, 99, 255, 0.4);
   z-index: 10;
   transition: transform 0.2s ease;
+  flex-shrink: 0;
 }
 
 .fab:hover {
@@ -283,11 +286,11 @@ body.dark .empty-state img {
 }
 
 .undo-btn {
-  position: fixed;
-  width: 65px;
-  height: 65px;
-  bottom: 125px; 
-  right: 40px;
+  /* position: fixed; */
+  width: 45px;
+  height: 45px;
+  /* bottom: 125px; 
+  right: 40px; */
   background-color: var(--primary);
   border-radius: 50%;
   color: white;
@@ -300,6 +303,7 @@ body.dark .empty-state img {
   box-shadow: 0 4px 15px rgba(108, 99, 255, 0.4);
   z-index: 10;
   transition: transform 0.2s ease;
+  flex-shrink: 0;
 }
 
 .undo-btn:hover {
@@ -307,8 +311,8 @@ body.dark .empty-state img {
 }
 
 .undo-btn svg {
-  width: 30px;
-  height: 30px;
+  width: 20px;
+  height: 20px;
 }
 
 /* --- Modal Overlay & Content --- */
