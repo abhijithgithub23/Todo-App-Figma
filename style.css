@@ -437,10 +437,9 @@ body.dark .empty-state img {
   white-space: nowrap;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.2s ease 0.4s; /* includes delay */
+  transition: opacity 0.2s ease 0.4s;
 }
 
-/* Show tooltip on hover */
 .undo-btn:hover .tooltip,
 .fab:hover .tooltip {
   opacity: 1;
