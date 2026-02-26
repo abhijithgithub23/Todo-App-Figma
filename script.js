@@ -49,6 +49,8 @@ function renderTodos() {
       const div = document.createElement("div");
       div.className = `todo-item ${todo.completed ? "completed" : ""}`;
 
+      todo.text=sanitizeTodoText(todo.text);
+
       div.innerHTML = `
         <input type="checkbox" class="custom-checkbox" ${
           todo.completed ? "checked" : ""
@@ -62,18 +64,24 @@ function renderTodos() {
       todoList.appendChild(div);
     });
   }
-  console.clear();
-  // console.log(JSON.stringify(historyStack, null, 2));
+  // console.clear();
 
-  console.table(
-  historyStack.map((item, index) => ({
-    index: index,
-    action: item.action,
-    id: item.todo.id,
-    text: item.todo.text
-  }))
-);
+  // console.table(
+  // historyStack.map((item, index) => ({
+  //   index: index,
+  //   action: item.action,
+  //   id: item.todo.id,
+  //   text: item.todo.text
+  // })));
 }
+
+
+
+function sanitizeTodoText(text) {
+  return text.replace(/[^a-zA-Z0-9]/g, " ");
+}
+
+
 
 // Modal Logic
 function openModal() {
