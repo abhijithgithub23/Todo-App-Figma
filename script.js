@@ -76,11 +76,9 @@ function renderTodos() {
 }
 
 
-
 function sanitizeTodoText(text) {
   return text.replace(/[^a-zA-Z0-9]/g, " ");
 }
-
 
 
 // Modal Logic
