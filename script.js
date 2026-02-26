@@ -64,6 +64,7 @@ function renderTodos() {
       todoList.appendChild(div);
     });
   }
+
   // console.clear();
 
   // console.table(
@@ -81,7 +82,6 @@ function sanitizeTodoText(text) {
 }
 
 
-// Modal Logic
 function openModal() {
   modalOverlay.classList.add("active");
   noteInput.focus();
